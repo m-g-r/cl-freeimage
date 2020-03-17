@@ -1146,37 +1146,35 @@
 
 (defmacro with-loaded-32bit-map ((path &key width height bitvar widthvar heightvar) &body body)
   (let ((dib (gensym))
-	(mwidth (gensym))
-	(mheight (gensym))
-	(w   (or widthvar (gensym)))
-	(h   (or heightvar (gensym)))
-	(bits (or bitvar (gensym)))
-	(new-dib (gensym)))
-    
+        (mwidth (gensym))
+        (mheight (gensym))
+        (w   (or widthvar (gensym)))
+        (h   (or heightvar (gensym)))
+        (bits (or bitvar (gensym)))
+        (new-dib (gensym)))
+
     `(let ((,dib (freeimage::get-32bit-dib ,path))
-	   (,mwidth ,width)
-	   (,mheight ,height))
+           (,mwidth ,width)
+           (,mheight ,height))
        (unwind-protect
-	    (let ((,w (freeimage:freeimage-getwidth ,dib))
-		  (,h (freeimage:freeimage-getheight ,dib))
-		  (,bits))
-	      
-	      (when (or ,mwidth ,mheight)
-		(unless ,mwidth
-		  (setf ,mwidth (round (* ,w (/ ,mheight ,h)))))
+            (let ((,w (freeimage:freeimage-getwidth ,dib))
+                  (,h (freeimage:freeimage-getheight ,dib))
+                  (,bits))
 
-		(unless ,mheight
-		  (setf ,mheight (round (* ,h (/ ,mwidth ,w)))))
-		
-		(let* ((,new-dib (freeimage:freeimage-rescale ,dib ,mwidth ,mheight :FILTER-BILINEAR)))
-		  (freeimage:unload-dib ,dib)
-		  (setf ,dib ,new-dib)
-		  (setf ,w (freeimage:freeimage-getwidth ,dib)
-			,h (freeimage:freeimage-getheight ,dib))))
+              (when (or ,mwidth ,mheight)
+                (unless ,mwidth
+                  (setf ,mwidth (round (* ,w (/ ,mheight ,h)))))
 
-	      (setf ,bits (freeimage::freeimage-getbits ,dib))
-	      (freeimage:freeimage-flipvertical ,dib)
-	      ,@body)
-	 (freeimage:unload-dib ,dib)))))
+                (unless ,mheight
+                  (setf ,mheight (round (* ,h (/ ,mwidth ,w)))))
 
-		
+                (let* ((,new-dib (freeimage:freeimage-rescale ,dib ,mwidth ,mheight :FILTER-BILINEAR)))
+                  (freeimage:unload-dib ,dib)
+                  (setf ,dib ,new-dib)
+                  (setf ,w (freeimage:freeimage-getwidth ,dib)
+                        ,h (freeimage:freeimage-getheight ,dib))))
+
+              (setf ,bits (freeimage::freeimage-getbits ,dib))
+              (freeimage:freeimage-flipvertical ,dib)
+              ,@body)
+         (freeimage:unload-dib ,dib)))))
