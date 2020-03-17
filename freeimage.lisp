@@ -337,7 +337,9 @@
   (:FILTER-LANCZOS3 5))
 
 
-(CFFI:DEFCENUM FREE-IMAGE-FORMAT (:FIF-UNKNOWN -1) (:FIF-BMP 0) (:FIF-ICO 1)
+(CFFI:DEFCENUM FREE-IMAGE-FORMAT
+  "I/O image format identifiers"
+               (:FIF-UNKNOWN -1) (:FIF-BMP 0) (:FIF-ICO 1)
                (:FIF-JPEG 2) (:FIF-JNG 3) (:FIF-KOALA 4) (:FIF-LBM 5)
                (:FIF-IFF 5) (:FIF-MNG 6) (:FIF-PBM 7) (:FIF-PBMRAW 8)
                (:FIF-PCD 9) (:FIF-PCX 10) (:FIF-PGM 11) (:FIF-PGMRAW 12)
@@ -346,7 +348,32 @@
                (:FIF-CUT 21) (:FIF-XBM 22) (:FIF-XPM 23) (:FIF-DDS 24)
                (:FIF-GIF 25) (:FIF-HDR 26) (:FIF-FAXG3 27) (:FIF-SGI 28)
                (:FIF-EXR 29) (:FIF-J2K 30) (:FIF-JP2 31) (:FIF-PFM 32)
-               (:FIF-PICT 33) (:FIF-RAW 34)) 
+               (:FIF-PICT 33) (:FIF-RAW 34) (:FIF-WEBP 35) (:FIF-JX 36))
+
+(CFFI:DEFCENUM (FREE-IMAGE-TYPE :INT)
+  "Image type used in FreeImage"
+  (:FIT-UNKNOWN  0)  ;; unknown type
+  (:FIT-BITMAP   1)  ;; standard image           : 1-, 4-, 8-, 16-, 24-, 32-bit
+  (:FIT-UINT16   2)  ;; array of unsigned short  : unsigned 16-bit
+  (:FIT-INT16    3)  ;; array of short           : signed 16-bit
+  (:FIT-UINT32   4)  ;; array of unsigned long   : unsigned 32-bit
+  (:FIT-INT32    5)  ;; array of long            : signed 32-bit
+  (:FIT-FLOAT    6)  ;; array of float           : 32-bit IEEE floating point
+  (:FIT-DOUBLE   7)  ;; array of double          : 64-bit IEEE floating point
+  (:FIT-COMPLEX  8)  ;; array of FICOMPLEX       : 2 x 64-bit IEEE floating point
+  (:FIT-RGB16    9)  ;; 48-bit RGB image         : 3 x 16-bit
+  (:FIT-RGBA16  10)  ;; 64-bit RGBA image        : 4 x 16-bit
+  (:FIT-RGBF    11)  ;; 96-bit RGB float image   : 3 x 32-bit IEEE floating point
+  (:FIT-RGBAF   12)) ;; 128-bit RGBA float image : 4 x 32-bit IEEE floating point
+
+(CFFI:DEFCENUM (FREE-IMAGE-COLOR-TYPE :INT)
+  "Image color type used in FreeImage"
+  (:FIC-MINISWHITE 0)  ;; min value is white
+  (:FIC-MINISBLACK 1)  ;; min value is black
+  (:FIC-RGB        2)  ;; RGB color model
+  (:FIC-PALETTE    3)  ;; color map indexed
+  (:FIC-RGBALPHA   4)  ;; RGB color model with alpha channel
+  (:FIC-CMYK       5)) ;; CMYK color model
 
 (CFFI:DEFCENUM FREE-IMAGE-MDMODEL
   (:FIMD-NODATA -1)
