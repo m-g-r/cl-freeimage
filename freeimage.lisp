@@ -336,6 +336,9 @@
   (:FILTER-CATMULLROM 4)
   (:FILTER-LANCZOS3 5))
 
+;; some abbreviations / glossary:
+;; FIF - free image format
+;; DIB - (free image) device-independent bitmap
 
 (CFFI:DEFCENUM FREE-IMAGE-FORMAT
   "I/O image format identifiers"
