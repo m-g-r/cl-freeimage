@@ -379,21 +379,20 @@
   (:FIC-CMYK       5)) ;; CMYK color model
 
 (CFFI:DEFCENUM FREE-IMAGE-MDMODEL
-  (:FIMD-NODATA -1)
-  (:FIMD-COMMENTS 0)	;; single comment or keywords
-  (:FIMD-EXIF-MAIN 1)	;; Exif-TIFF metadata
-  (:FIMD-EXIF-EXIF 2)	;; Exif-specific metadata
-  (:FIMD-EXIF-GPS 3)	;; Exif GPS metadata
-  (:FIMD-EXIF-MAKERNOTE 4)	;; Exif maker note metadata
-  (:FIMD-EXIF-INTEROP 5)	;; Exif interoperability metadata
-  (:FIMD-IPTC 6)	;; IPTC/NAA metadata
-  (:FIMD-XMP 7)	;; Abobe XMP metadata
-  (:FIMD-GEOTIFF	 8)	;; GeoTIFF metadata
-  (:FIMD-ANIMATION  9)	;; Animation metadata
-  (:FIMD-CUSTOM	10)	;; Used to attach other metadata types to a dib
-  (:FIMD-EXIF-RAW  11))	;; Exif metadata as a raw buffer
-
-
+  "Metadata models supported by FreeImage"
+  (:FIMD-NODATA        -1)
+  (:FIMD-COMMENTS       0)  ;; single comment or keywords
+  (:FIMD-EXIF-MAIN      1)  ;; Exif-TIFF metadata
+  (:FIMD-EXIF-EXIF      2)  ;; Exif-specific metadata
+  (:FIMD-EXIF-GPS       3)  ;; Exif GPS metadata
+  (:FIMD-EXIF-MAKERNOTE 4)  ;; Exif maker note metadata
+  (:FIMD-EXIF-INTEROP   5)  ;; Exif interoperability metadata
+  (:FIMD-IPTC           6)  ;; IPTC/NAA metadata
+  (:FIMD-XMP            7)  ;; Abobe XMP metadata
+  (:FIMD-GEOTIFF        8)  ;; GeoTIFF metadata
+  (:FIMD-ANIMATION      9)  ;; Animation metadata
+  (:FIMD-CUSTOM        10)  ;; Used to attach other metadata types to a dib
+  (:FIMD-EXIF-RAW      11)) ;; Exif metadata as a raw buffer
 
 (CFFI:DEFCFUN ("FreeImage_Initialise" FREEIMAGE-INITIALISE) :VOID
               (LOAD_LOCAL_PLUGINS_ONLY :POINTER)) 
